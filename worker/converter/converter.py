@@ -3,7 +3,6 @@ import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-
 def converter(arquivo_entrada: str, pasta_saida: str):
     os.makedirs(pasta_saida, exist_ok=True)
     
