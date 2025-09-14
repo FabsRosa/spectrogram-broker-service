@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+import os
 import uuid
 import json
 
@@ -13,7 +14,8 @@ def upload_audio():
     task_id = str(uuid.uuid4())
     
     # Salvar arquivo temporariamente (em produção, usar storage adequado)
-    file_path = f"/tmp/{task_id}_{audio_file.filename}"
+    temp_dir = os.environ.get('TEMP', os.path.join(os.path.expanduser('~'), 'AppData', 'Local', 'Temp'))
+    file_path = os.path.join(temp_dir, f"{task_id}_{audio_file.filename}")
     audio_file.save(file_path)
     
     # Adicionar tarefa à fila do Redis

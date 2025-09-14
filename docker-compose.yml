@@ -5,6 +5,8 @@ services:
     image: redis:alpine
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
     networks:
       - audio-network
 
@@ -27,6 +29,11 @@ services:
       - redis
     networks:
       - audio-network
+    # Para Windows, pode ser necessário aumentar o timeout
+    deploy:
+      resources:
+        limits:
+          memory: 1G
 
   frontend:
     build: ./frontend-service
@@ -42,3 +49,6 @@ services:
 networks:
   audio-network:
     driver: bridge
+
+volumes:
+  redis_data:
