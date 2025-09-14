@@ -31,10 +31,8 @@ const FileUpload = ({ onFilesSelected, accept = 'audio/*' }) => {
         setIsDragging(true);
         setIsOverContainer(true);
         
-        // Muda para o ícone de download após um pequeno delay
-        timeoutRef.current = setTimeout(() => {
-          setIconClass('fas fa-cloud-download-alt');
-        }, 150);
+        // Muda para o ícone de download
+        setIconClass('fas fa-cloud-download-alt');
       }
     };
 
@@ -45,6 +43,7 @@ const FileUpload = ({ onFilesSelected, accept = 'audio/*' }) => {
       // Mantém o estado como "sobre o container" enquanto o mouse se move
       if (e.dataTransfer.types.includes('Files') && !isOverContainer) {
         setIsOverContainer(true);
+        setIconClass('fas fa-cloud-download-alt');
       }
     };
 
@@ -63,11 +62,7 @@ const FileUpload = ({ onFilesSelected, accept = 'audio/*' }) => {
         
         if (dragCounter.current === 0) {
           setIsOverContainer(false);
-          
-          // Volta para o ícone de upload após um pequeno delay
-          timeoutRef.current = setTimeout(() => {
-            setIconClass('fas fa-cloud-upload-alt');
-          }, 150);
+          setIconClass('fas fa-cloud-upload-alt');
         }
       }
     };
@@ -126,11 +121,21 @@ const FileUpload = ({ onFilesSelected, accept = 'audio/*' }) => {
       setIconClass('fas fa-cloud-upload-alt');
     };
 
+    const handleGlobalDrop = (e) => {
+      // Só processa se não for um drop no nosso container
+      const container = containerRef.current;
+      if (container && !container.contains(e.target)) {
+        handleGlobalDragEnd();
+      }
+    };
+
     document.addEventListener('dragend', handleGlobalDragEnd);
+    document.addEventListener('drop', handleGlobalDrop);
     document.addEventListener('mouseup', handleGlobalDragEnd); // Fallback
 
     return () => {
       document.removeEventListener('dragend', handleGlobalDragEnd);
+      document.removeEventListener('drop', handleGlobalDrop);
       document.removeEventListener('mouseup', handleGlobalDragEnd);
     };
   }, []);
