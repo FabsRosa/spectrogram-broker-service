@@ -45,17 +45,23 @@ function App() {
       </header>
 
       <main className="app__main">
-        <FileUpload 
-          onFilesSelected={handleFilesSelected}
-          accept="audio/*"
-        />
-        
-        <FileList 
-          files={files}
-          onRemoveFile={removeFile}
-          onPreviewImage={handlePreviewImage}
-          onDownloadImage={handleDownloadImage}
-        />
+        <div className="app__content-grid">
+          <div className="app__upload-section">
+            <FileUpload 
+              onFilesSelected={handleFilesSelected}
+              accept="audio/*"
+            />
+          </div>
+          
+          <div className="app__files-section">
+            <FileList 
+              files={files}
+              onRemoveFile={removeFile}
+              onPreviewImage={handlePreviewImage}
+              onDownloadImage={handleDownloadImage}
+            />
+          </div>
+        </div>
       </main>
 
       {viewerImage && (
