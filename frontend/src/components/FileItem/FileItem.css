@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 1rem;
   min-height: 120px;
-  animation: slideInUp 0.4s ease-out forwards;
+  animation: slideInUp 0.6s ease-out forwards;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -46,7 +46,7 @@
 .file-item__info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -61,6 +61,7 @@
 .file-item__size {
   color: #757575;
   font-size: 0.875rem;
+  margin-right: 0.3rem;
 }
 
 .file-item__actions {
@@ -94,14 +95,14 @@
 }
 
 .file-item__action--remove:hover {
-  color: #f44336;
+  color: #ff1100;
 }
 
 .file-item__error {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #fd8e86;
+  color: #ff5b5b;
   font-size: 0.875rem;
 }
 

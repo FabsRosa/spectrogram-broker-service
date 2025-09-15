@@ -40,43 +40,46 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
       <div className="file-item__info">
         <div className="file-item__name">{file.name}</div>
         <div className="file-item__size">{formatFileSize(file.file.size)}</div>
-        <StatusIndicator status={file.status} progress={file.progress} />
       </div>
       
-      <div className="file-item__actions">
-        {file.status === 'completed' && file.result && (
-          <>
-            <button 
-              className="file-item__action file-item__action--preview"
-              onClick={handlePreview}
-              title="Visualizar espectrograma"
-            >
-              <i className="fas fa-eye"></i>
-            </button>
-            <button 
-              className="file-item__action file-item__action--download"
-              onClick={handleDownload}
-              title="Baixar espectrograma"
-            >
-              <i className="fas fa-download"></i>
-            </button>
-          </>
-        )}
-        
-        {file.status === 'error' && (
-          <div className="file-item__error">
-            <i className="fas fa-exclamation-triangle"></i>
-            <span>{file.error || 'Erro no processamento'}</span>
-          </div>
-        )}
-        
-        <button 
-          className="file-item__action file-item__action--remove"
-          onClick={handleRemove}
-          title="Remover arquivo"
-        >
-          <i className="fas fa-times"></i>
-        </button>
+      <div className="file-item__info">
+        <div className="file-item__actions">
+          {file.status === 'completed' && file.result && (
+            <>
+              <button 
+                className="file-item__action file-item__action--preview"
+                onClick={handlePreview}
+                title="Visualizar espectrograma"
+              >
+                <i className="fas fa-eye"></i>
+              </button>
+              <button 
+                className="file-item__action file-item__action--download"
+                onClick={handleDownload}
+                title="Baixar espectrograma"
+              >
+                <i className="fas fa-download"></i>
+              </button>
+            </>
+          )}
+          
+          {file.status === 'error' && (
+            <div className="file-item__error">
+              <i className="fas fa-exclamation-triangle"></i>
+              <span>{file.error || 'Erro no processamento'}</span>
+            </div>
+          )}
+          
+          <button 
+            className="file-item__action file-item__action--remove"
+            onClick={handleRemove}
+            title="Remover arquivo"
+          >
+            <i className="fas fa-times"></i>
+          </button>
+        </div>
+
+        <StatusIndicator status={file.status} progress={file.progress} />
       </div>
       
       {file.status === 'completed' && file.result && (

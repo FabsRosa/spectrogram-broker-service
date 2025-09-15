@@ -160,11 +160,14 @@ const FileUpload = ({ onFilesSelected, accept = 'audio/*' }) => {
         </div>
         <p className="file-upload__text">
           {isDragging 
-            ? 'Solte os arquivos de áudio aqui' 
-            : 'Arraste e solte arquivos de áudio aqui ou'}
+            ? 'Solte o arquivo de áudio aqui' 
+            : 'Arraste e solte arquivos de áudio aqui'}
         </p>
         {!isDragging && (
-          <label className="file-upload__button">
+          <p className="file-upload__hint">...ou</p>
+        )}
+        {!isDragging && (
+            <label className="file-upload__button">
             <input
               type="file"
               multiple
@@ -172,7 +175,7 @@ const FileUpload = ({ onFilesSelected, accept = 'audio/*' }) => {
               onChange={handleFileSelect}
               className="file-upload__input"
             />
-            Selecione os arquivos
+            Selecionar arquivos
           </label>
         )}
         <p className="file-upload__hint">

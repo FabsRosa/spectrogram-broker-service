@@ -34,23 +34,26 @@
 }
 
 .file-upload__icon {
-  font-size: 4rem;
+  font-size: 5.5rem;
   color: #2196f3;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-bottom: -0.5rem;
+  animation: pulse 1.5s infinite alternate;
+  margin-bottom: -1.5rem;
 }
 
 .file-upload--dragging .file-upload__icon {
-  font-size: 6.57rem;
+  font-size: 9rem;
   color: #757575;
   animation: pulse 1.5s infinite alternate;
+  margin-bottom: -1.5rem;
 }
 
 .file-upload--dragging.file-upload--over .file-upload__icon {
   color: #2196f3;
   opacity: 1;
   transform: scale(1); 
+  margin-bottom: -1.5rem;
 }
 
 .file-upload--dragging:not(.file-upload--over) .file-upload__icon {
@@ -63,7 +66,7 @@
     transform: scale(1);
   }
   100% {
-    transform: scale(1.1);
+    transform: scale(1.175);
   }
 }
 
@@ -101,6 +104,7 @@
   font-size: 1.3rem;
   transition: all 0.3s ease;
   font-weight: 500;
+  margin-bottom: -1rem;
 }
 
 .file-upload--dragging .file-upload__text {
@@ -140,7 +144,7 @@
 .file-upload__hint {
   margin: 0;
   font-size: 1rem;
-  color: #9e9e9e;
+  color: #8a8a8a;
   transition: all 0.3s ease;
 }
 
