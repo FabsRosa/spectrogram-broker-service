@@ -39,9 +39,9 @@ function App() {
     <div className="app">
       <header className="app__header">
         <h1 className="app__title">Conversor de Áudio para Espectrograma</h1>
-        <p className="app__subtitle">
+        {/* <p className="app__subtitle">
           Converta seus arquivos de áudio em visualizações espectrográficas
-        </p>
+        </p> */}
       </header>
 
       <main className="app__main">

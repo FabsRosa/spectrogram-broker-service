@@ -4,6 +4,9 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   height: 100%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 460px;
+  max-height: 460px;
   display: flex;
   flex-direction: column;
 }
@@ -25,6 +28,7 @@
 .file-list__header {
   padding: 1.5rem;
   border-bottom: 1px solid #e0e0e0;
+  background: linear-gradient(135deg, #3a90e6 0%, #57abff 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,22 +37,40 @@
 
 .file-list__header h3 {
   margin: 0;
-  color: #333;
+  color: white;
   font-size: 1.25rem;
 }
 
 .file-list__count {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #ffffff;
+  color: #3179c0;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .file-list__items {
   padding: 0;
   flex: 1;
   overflow-y: auto;
-  max-height: 600px;
+}
+
+/* Estilo personalizado para a barra de rolagem */
+.file-list__items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.file-list__items::-webkit-scrollbar-track {
+  background: #e7eef5;
+  border-radius: 4px;
+}
+
+.file-list__items::-webkit-scrollbar-thumb {
+  background: #bcd2e7;
+  border-radius: 4px;
+}
+
+.file-list__items::-webkit-scrollbar-thumb:hover {
+  background: #9aafc7;
 }
