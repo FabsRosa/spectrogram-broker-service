@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: column;
   min-height: 460px;
-  max-height: calc(100vh - 260px); /* Altura máxima baseada na viewport */
+  max-height: calc(100vh - 270px); /* Altura máxima baseada na viewport */
 }
 
 .app__footer {
