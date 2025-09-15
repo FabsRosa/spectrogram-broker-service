@@ -9,6 +9,7 @@
   color: white;
   padding: 2rem 0;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .app__title {
@@ -26,7 +27,11 @@
 
 .app__main {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem 0;
+  min-height: 460px;
 }
 
 .app__content-grid {
@@ -34,17 +39,23 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
   align-items: start;
 }
 
-.app__upload-section,
+.app__upload-section {
+  display: flex;
+  flex-direction: column;
+  height: 460px;
+}
+
 .app__files-section {
   display: flex;
   flex-direction: column;
   min-height: 460px;
-  max-height: 600px;
+  max-height: calc(100vh - 260px); /* Altura máxima baseada na viewport */
 }
 
 .app__footer {
@@ -53,6 +64,7 @@
   text-align: center;
   color: #2c2c2c;
   border-top: 1px solid #e0e0e0;
+  flex-shrink: 0;
 }
 
 /* Responsividade */
@@ -64,6 +76,10 @@
   
   .app__title {
     font-size: 2rem;
+  }
+  
+  .app__files-section {
+    max-height: none; /* Remove a altura máxima em tablets */
   }
 }
 
@@ -79,8 +95,7 @@
   
   .app__upload-section,
   .app__files-section {
-    min-height: 350px;
-    max-height: 500px;
+    min-height: 400px;
   }
 }
 
@@ -103,7 +118,6 @@
   
   .app__upload-section,
   .app__files-section {
-    min-height: 300px;
-    max-height: 450px;
+    min-height: 350px;
   }
 }
