@@ -4,7 +4,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   height: 100%;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 460px;
   display: flex;
   flex-direction: column;
@@ -17,6 +16,16 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .file-list--empty i {
@@ -47,14 +56,25 @@
   border-radius: 12px;
   font-size: 0.875rem;
   font-weight: 600;
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .file-list__items {
   padding: 0;
   flex: 1;
   overflow-y: auto;
-  /* Altura calculada para exibir exatamente 3 arquivos (cada item tem ~120px) */
-  min-height: 360px; /* 3 itens * 120px */
+  min-height: 360px;
 }
 
 /* Estilo personalizado para a barra de rolagem */

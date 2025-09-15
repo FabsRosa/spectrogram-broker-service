@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StatusIndicator from '../StatusIndicator/StatusIndicator';
 import './FileItem.css';
 
 const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
+  const [isExiting, setIsExiting] = useState(false);
+
   const handlePreview = () => {
     if (file.status === 'completed' && file.result && onPreview) {
       onPreview(file.result.spectrogram, file.name);
@@ -15,6 +17,16 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
     }
   };
 
+  const handleRemove = () => {
+    if (onRemove) {
+      setIsExiting(true);
+      // Aguarda a animação terminar antes de remover
+      setTimeout(() => {
+        onRemove(file.id);
+      }, 300);
+    }
+  };
+
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -24,7 +36,7 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
   };
 
   return (
-    <div className="file-item">
+    <div className={`file-item ${isExiting ? 'file-item--exiting' : ''}`}>
       <div className="file-item__info">
         <div className="file-item__name">{file.name}</div>
         <div className="file-item__size">{formatFileSize(file.file.size)}</div>
@@ -60,7 +72,7 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
         
         <button 
           className="file-item__action file-item__action--remove"
-          onClick={() => onRemove && onRemove(file.id)}
+          onClick={handleRemove}
           title="Remover arquivo"
         >
           <i className="fas fa-times"></i>
