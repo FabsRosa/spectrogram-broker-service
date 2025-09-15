@@ -66,7 +66,13 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
           {file.status === 'error' && (
             <div className="file-item__error">
               <i className="fas fa-exclamation-triangle"></i>
-              <span>{file.error || 'Erro no processamento'}</span>
+              <span>{file.error === 'Upload failed: Network Error' ? 'Sem conexão ao servidor' : 'Erro no processamento'}</span>
+            </div>
+          )}
+
+          {file.status !== 'completed' && !(file.result) && file.status !== 'error' && (
+            <div className="file-item__remove">
+              <span>{'Remover'}</span>
             </div>
           )}
           

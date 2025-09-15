@@ -102,7 +102,15 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #ff5b5b;
+  color: #a73e3e;
+  font-size: 0.875rem;
+}
+
+.file-item__remove {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #757575;
   font-size: 0.875rem;
 }
 
