@@ -42,7 +42,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
-  align-items: start;
+  align-items: center;
 }
 
 .app__upload-section {
@@ -79,7 +79,11 @@
   }
   
   .app__files-section {
-    max-height: none; /* Remove a altura máxima em tablets */
+    max-height: none;
+  }
+  
+  .app__upload-section {
+    justify-content: flex-start;
   }
 }
 
