@@ -1,0 +1,98 @@
+.file-list {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 100%;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+.file-list--empty {
+  padding: 3rem;
+  text-align: center;
+  color: #666666;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.file-list--empty i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.file-list__header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: linear-gradient(135deg, #3a90e6 0%, #57abff 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.file-list__header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.file-list__count {
+  background-color: #ffffff;
+  color: #3179c0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.file-list__items {
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 360px;
+}
+
+/* Estilo personalizado para a barra de rolagem */
+.file-list__items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.file-list__items::-webkit-scrollbar-track {
+  background: #e7eef5;
+  border-radius: 4px;
+}
+
+.file-list__items::-webkit-scrollbar-thumb {
+  background: #bcd2e7;
+  border-radius: 4px;
+}
+
+.file-list__items::-webkit-scrollbar-thumb:hover {
+  background: #9aafc7;
+}
