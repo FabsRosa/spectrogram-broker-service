@@ -7,7 +7,7 @@ const FileList = ({ files, onRemoveFile, onPreviewImage, onDownloadImage }) => {
     return (
       <div className="file-list file-list--empty">
         <i className="fas fa-file-audio"></i>
-        <p>Nenhum arquivo enviado ainda</p>
+        <p>Nenhum arquivo enviado</p>
       </div>
     );
   }

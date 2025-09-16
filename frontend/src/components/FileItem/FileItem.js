@@ -44,6 +44,14 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
       
       <div className="file-item__info">
         <div className="file-item__actions">
+          <button 
+            className="file-item__action file-item__action--remove"
+            onClick={handleRemove}
+            title="Remover arquivo"
+          >
+            <i className="fas fa-times"></i>
+          </button>
+          
           {file.status === 'completed' && file.result && (
             <>
               <button 
@@ -75,14 +83,6 @@ const FileItem = ({ file, onPreview, onDownload, onRemove }) => {
               <span>{'Remover'}</span>
             </div>
           )}
-          
-          <button 
-            className="file-item__action file-item__action--remove"
-            onClick={handleRemove}
-            title="Remover arquivo"
-          >
-            <i className="fas fa-times"></i>
-          </button>
         </div>
 
         <StatusIndicator status={file.status} progress={file.progress} />
