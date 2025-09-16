@@ -1,33 +1,42 @@
-import socket
+import redis
+import json
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+import numpy as np
 import os
-from converter import converter
 
-HOST = "NAOSEI"
-PORT =  "TBM NSEI "
-ARQ_ENTRADA = "arquivo_entrada"
-ARQ_SAIDA = "arquivo_saida"
+r = redis.Redis(host='localhost', port=6379, db=0)
 
-def main():
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
-        s.listen()
-        print(f"[WORKER] Aguardando conexão em {HOST}:{PORT}...")
+while True:
+    _, task_json = r.blpop('audio_tasks')
+    task = json.loads(task_json)
 
-        while True:
-            conn, addr = s.accept()
-            with conn:
-                print(f"[WORKER] Conectado a {addr}")
-                data = conn.recv(1024).decode()
-                if not data:
-                    continue
+    audio_path = task['file_path']
+    task_id = task['task_id']
 
-                audio_name = data.strip()
-                entrada = os.path.join(ARQ_ENTRADA, audio_name)
-                try:
-                    converter(entrada, ARQ_SAIDA)
-                    conn.sendall(b"OK")
-                except Exception as e:
-                    conn.sendall(f"ERRO: {e}".encode())
+    # Gera espectrograma
+    y, sr = librosa.load(audio_path)
+    S = librosa.stft(y)
+    S_db = librosa.amplitude_to_db(np.abs(S), ref=np.max)
 
-if __name__ == "__main__":
-    main()
+    # Salva imagem
+    output_dir = 'static'
+    os.makedirs(output_dir, exist_ok=True)
+    img_filename = f"{task_id}_espectrograma.png"
+    img_path = os.path.join(output_dir, img_filename)
+
+    plt.figure(figsize=(10, 4))
+    librosa.display.specshow(S_db, sr=sr, x_axis='time', y_axis='log')
+    plt.colorbar(format='%+2.0f dB')
+    plt.title('Espectrograma')
+    plt.tight_layout()
+    plt.savefig(img_path)
+    plt.close()
+
+    # Salva resultado no Redis
+    result = {
+        'img_url': f'/static/{img_filename}',
+        'task_id': task_id
+    }
+    r.set(f'result:{task_id}', json.dumps(result))
