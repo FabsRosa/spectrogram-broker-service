@@ -7,6 +7,7 @@ import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from converte import audio_to_spectrogram_base64 #chamando a funçao de conversao de audio base 54 para img base 64
 
 # Configuração do Redis
 redis_host = 'redis-server'  # Nome do serviço Redis na rede Docker
@@ -32,7 +33,7 @@ def process_task(task_id):
     
     try:
         # Gera o espectrograma
-        spectrogram_data = FUNCAO_DE_CONVERSAO_AQUI(audio_data)
+        spectrogram_data = audio_to_spectrogram_base64(img_base64=audio_data)
         # Atualiza os dados da tarefa com o espectrograma e status
         task_data['spectrogram_data'] = spectrogram_data
         task_data['status'] = 'completed'
