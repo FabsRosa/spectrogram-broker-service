@@ -1,6 +1,5 @@
 FROM python:3.9-slim
 
-# Instala dependências system para audio processing
 RUN apt-get update && apt-get install -y libsndfile1
 
 WORKDIR /app

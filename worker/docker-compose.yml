@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  worker:
+    build: .
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=0
+    networks:
+      - spectrogram-net
+    deploy:
+      mode: replicated
+      replicas: ${WORKERS_AMOUNT:-1}  # Usa variável do .env ou padrão 1
+
+networks:
+  spectrogram-net:
+    external: true

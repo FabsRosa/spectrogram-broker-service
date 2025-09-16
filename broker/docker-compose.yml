@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: spectrogram-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_EXTERNAL_PORT}:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_PASSWORD}"]
+    networks:
+      - spectrogram-net
+
+  broker:
+    build: .
+    container_name: spectrogram-broker
+    restart: unless-stopped
+    ports:
+      - "${BROKER_PORT}:5000"
+    environment:
+      - REDIS_HOST=spectrogram-redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=0
+    depends_on:
+      - redis
+    networks:
+      - spectrogram-net
+
+volumes:
+  redis_data:
+
+networks:
+  spectrogram-net:
+    driver: bridge

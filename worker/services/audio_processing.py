@@ -4,8 +4,7 @@ import numpy as np
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
-from scipy.io.wavfile import write  # para salvar o .wav
-import base64
+from scipy.io.wavfile import write  # Para salvar o .wav
 
 def audio_base64_to_spectrogram_png(audio_base64: str, wav_path: str = "temp_audio.wav", output_path: str = "spectrogram.png") -> str:
     """
